@@ -1,0 +1,152 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: rgb(57, 89, 143);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 900px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 15px 28px 0px rgba(0, 0, 0, 0.69);
+    -webkit-box-shadow: 5px 15px 28px 0px rgba(0, 0, 0, 0.69);
+    -moz-box-shadow: 5px 15px 28px 0px rgba(0, 0, 0, 0.69);
+}
+
+.loginImg {
+    width: 350px;
+    height: 600px;
+    background-image: url("/Source/LoginBG.jpg");
+    background-size: 100%;
+    background-position: center;
+
+}
+
+.form-container {
+    height: 600px;
+    width: 270px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ============Login-Register Form============= */
+
+
+.container .form-container .login-form .item,
+.register-form .item {
+    padding: 5px 0px;
+
+}
+
+.container .form-container .login-form .head,
+.register-form .head {
+    padding: 10px;
+}
+
+.container .form-container .login-form .head h2,
+.register-form .head h2 {
+    width: 200px;
+    text-align: left;
+    padding: 5px 0px;
+    font-size: 24px;
+    color: rgb(57, 89, 143);
+}
+
+.container .form-container .login-form .head span,
+.register-form .head span {
+    font-size: 14px;
+    color: gray;
+    width: 200px;
+    text-align: left;
+}
+
+.container .form-container .login-form .item span,
+.register-form .item span {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(57, 89, 143);
+}
+
+.container .form-container .login-form .item input,
+.register-form .item input {
+    margin-left: 3px;
+    padding: 7px 10px;
+    border: 1px grey solid;
+    border-radius: 5px;
+}
+
+.container .form-container .login-form button {
+    margin: 10px 0px 10px 3px;
+    padding: 10px 75px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(57, 89, 143);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.container .form-container .login-form .account,
+.register-form .account {
+    font-size: 14px;
+}
+
+.container .form-container .login-form .account a,
+.register-form .account a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.container .form-container .login-form .account a:hover {
+    text-decoration: underline;
+}
+
+.container .form-container .register-form .account a:hover {
+    text-decoration: underline;
+}
+
+.container .form-container .register-form button {
+    margin: 10px 0px 10px 3px;
+    padding: 10px 64.5px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(57, 89, 143);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.container .form-container button:hover {
+    background-color: rgb(255, 207, 96);
+}
+
+
+/* =================================== */
+
+
+form {
+    display: none;
+}
+
+form.active {
+    display: block;
+}

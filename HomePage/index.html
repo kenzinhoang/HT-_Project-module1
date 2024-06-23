@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <!-- check user login -->
+    <script>
+        let userLogin = localStorage.getItem("userLogin")
+        if (!userLogin) {
+            window.location.href = "/HomePage/newUser"
+        }
+    </script>
 </head>
 
 <body>
