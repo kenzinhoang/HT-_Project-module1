@@ -7,25 +7,41 @@
     <title>Login Site</title>
     <link rel="stylesheet" href="./stye.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-</head>
+    <!-- <script>
+        let userList = [
+            {
+                id: Date.now(),
+                userName: "admin",
+                userPassword: "123"
+            },
+            {
+                id: Date.now(),
+                userName: "member1",
+                userPassword: "1234"
+            }
+        ]
+
+        localStorage.setItem("userList", JSON.stringify(userList))
+    </script>
+</head> -->
 
 <body>
-    <!----------------- Login-Register Form ------------------------->
+    <!----------------- Login Form ------------------------->
     <div class="container">
         <div class="loginImg"></div>
         <div class="form-container">
-            <form id="loginForm" class="login-form">
+            <form onsubmit="login(event)" id="loginForm" class="login-form">
                 <div class="head">
                     <h2>Welcome back !</h2>
                     <span>Please enter your details</span>
                 </div>
                 <div class="item">
-                    <span>Usename</span>
-                    <input type="text" placeholder="Enter your usename" required>
+                    <span>Username</span>
+                    <input name="userName" type="text" placeholder="Enter your usename" required>
                 </div>
                 <div class="item">
                     <span>Password</span>
-                    <input type="password" placeholder="Enter your password" required>
+                    <input name="userPassword" type="password" placeholder="Enter your password" required>
                 </div>
                 <button type="submit">Login</button>
                 <div class="account">
@@ -35,18 +51,21 @@
                 </div>
             </form>
 
-            <form id="registerForm" class="register-form">
+            <!----------------------------Register Form---------------------------->
+            <form onsubmit="register(event)" id="registerForm" class="register-form">
                 <div class="head">
                     <h2>Register</h2>
                     <span>Please enter your details</span>
                 </div>
                 <div class="item">
-                    <span>Usename</span>
-                    <input type="text" placeholder="Enter your usename" required>
+                    <span>Username</span>
+                    <input name="newUserName" type="text" placeholder="Enter your usename" required>
+                    <i>*Username must be at least 2 characters</i>
                 </div>
                 <div class="item">
                     <span>Password</span>
-                    <input type="password" placeholder="Enter your password" required>
+                    <input name="newUserPassword" type="password" placeholder="Enter your password" required>
+                    <i>*Password must be 6 characters</i>
                 </div>
                 <button type="submit">Register</button>
                 <div class="account">
@@ -64,6 +83,7 @@
 
     <!-- Script dành cho chuyển đổi login form và register form -->
     <script src="./script.js"></script>
+
 </body>
 
 </html>

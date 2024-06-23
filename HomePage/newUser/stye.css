@@ -22,15 +22,17 @@ body {
     box-shadow: 5px 15px 28px 0px rgba(0, 0, 0, 0.69);
     -webkit-box-shadow: 5px 15px 28px 0px rgba(0, 0, 0, 0.69);
     -moz-box-shadow: 5px 15px 28px 0px rgba(0, 0, 0, 0.69);
+    border-radius: 10px;
 }
 
 .loginImg {
     width: 350px;
     height: 600px;
     background-image: url("/Source/LoginBG.jpg");
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
-
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .form-container {
@@ -38,7 +40,8 @@ body {
     width: 270px;
     background-color: white;
     padding: 20px;
-    border-radius: 8px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
@@ -116,6 +119,11 @@ body {
     text-decoration: none;
 }
 
+.container .form-container .register-form .item i {
+    font-size: 10px;
+    padding-left: 3px;
+}
+
 .container .form-container .login-form .account a:hover {
     text-decoration: underline;
 }
@@ -142,7 +150,7 @@ body {
 
 /* =================================== */
 
-
+/*======================Form animate =================*/
 form {
     display: none;
 }
@@ -150,3 +158,5 @@ form {
 form.active {
     display: block;
 }
+
+/*===================================================*/
