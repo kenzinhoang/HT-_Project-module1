@@ -69,37 +69,70 @@ function login(event) {
 
 
 /* =====================Đăng ký mới====================== */
-function register(event) {
+// function register(event) {
+//     event.preventDefault();
+//     let newUserName = event.target.newUserName.value;
+//     let newUserPassowrd = event.target.newUserPassword.value;
+//     //da vao
+//     userList = JSON.parse(localStorage.getItem("userList"));
+//     let newUser = new Object
+//     for (let i in userList) {
+//         if (userList[i].userName.includes(newUserName)) {
+//             alert(`Tên đăng nhập ${newUserName} đã tồn tại`)
+//             return
+//         }
+//         if (userList[i].userName != newUserName && userList[i].userName.includes(newUserName)) {
+//             console.log("newUserName", newUserName)
+//             validateUserName(newUserName)
+//             newUser.id = Date.now()
+//             newUser.userName = newUserName;
+//             break
+//         }
+//     }
+//     validateUserPassword(newUserPassowrd)
+//     newUser.userPassword = newUserPassowrd
+//     newUser.userStatus = true
+//     console.log("newUser", newUser)//đã vào
+//     if (newUser != {}) {
+//         userList.push(newUser)
+//         console.log(userList);
+//         localStorage.setItem("userList", JSON.stringify(userList))
+
+//     }
+
+// }
+function registerHomeSite(event) {
     event.preventDefault();
     let newUserName = event.target.newUserName.value;
     let newUserPassowrd = event.target.newUserPassword.value;
-    //da vao
+    //ok
     userList = JSON.parse(localStorage.getItem("userList"));
     let newUser = new Object
+
+    /*bug ok?*/
     for (let i in userList) {
         if (userList[i].userName.includes(newUserName)) {
             alert(`Tên đăng nhập ${newUserName} đã tồn tại`)
             return
         }
-        if (userList[i].userName != newUserName && userList[i].userName.includes(newUserName)) {
-            console.log("newUserName", newUserName)
+        if (userList[i].userName != (newUserName)) { //
+            console.log("add", newUserName)
             validateUserName(newUserName)
             newUser.id = Date.now()
             newUser.userName = newUserName;
-            break
+            validateUserPassword(newUserPassowrd)
+            newUser.userPassword = newUserPassowrd
+            newUser.userStatus = true
+            console.log("newUser", newUser)//đã vào
         }
     }
-    validateUserPassword(newUserPassowrd)
-    newUser.userPassword = newUserPassowrd
-    newUser.userStatus = true
-    console.log("newUser", newUser)//đã vào
-    if (newUser != {}) {
+    /*bug ok?*/
+    if (newUser.userName != undefined) {
         userList.push(newUser)
         console.log(userList);
         localStorage.setItem("userList", JSON.stringify(userList))
-
     }
-
+    userManage(userList)
 }
 
 //kiểm tra điều kiện của newUserName

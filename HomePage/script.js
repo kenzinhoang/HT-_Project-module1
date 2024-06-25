@@ -20,7 +20,7 @@ function userManage(list) {
                     <th scope="row">${Number(i) + 1}</th>
                     <td>#${list[i].id}</td>
                     <td>&#129414 ${list[i].userName}</td>
-                    <td>${list[i].status}
+                    <td>${list[i].userStatus}
                         <button>Edit</button>
                         </td>
                     <td>
@@ -50,13 +50,11 @@ function registerHomeSite(event) {
     //ok
     userList = JSON.parse(localStorage.getItem("userList"));
     let newUser = new Object
-    let temp = true
 
-    /*bug*/
+    /*bug ok?*/
     for (let i in userList) {
-        if (userList[i].userName == newUserName) {
+        if (userList[i].userName.includes(newUserName)) {
             alert(`Tên đăng nhập ${newUserName} đã tồn tại`)
-            console.log("trung", newUserName)
             return
         }
         if (userList[i].userName != (newUserName)) { //
@@ -64,15 +62,14 @@ function registerHomeSite(event) {
             validateUserName(newUserName)
             newUser.id = Date.now()
             newUser.userName = newUserName;
-            break
+            validateUserPassword(newUserPassowrd)
+            newUser.userPassword = newUserPassowrd
+            newUser.userStatus = true
+            console.log("newUser", newUser)//đã vào
         }
     }
-    /*bug*/
-    validateUserPassword(newUserPassowrd)
-    newUser.userPassword = newUserPassowrd
-    newUser.userStatus = true
-    console.log("newUser", newUser)//đã vào
-    if (newUser != {}) {
+    /*bug ok?*/
+    if (newUser.userName != undefined) {
         userList.push(newUser)
         console.log(userList);
         localStorage.setItem("userList", JSON.stringify(userList))
