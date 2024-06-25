@@ -49,17 +49,17 @@ function login(event) {
 
     //userName check
     if (!temp) {
-        alert("User not found")
+        alert("Người dùng không tồn tại")
         return
     }
 
     //userPassword check
     if (temp.userPassword != userPassword) {
-        alert("Incorrect password")
+        alert("Mật khẩu chưa chính xác")
         return
     }
 
-    alert(`Welcome back ${temp.userName}`)
+    alert(`Xin chào ${temp.userName}`)
 
     localStorage.setItem("userLogin", JSON.stringify(temp))
     window.location.href = "/HomePage"
@@ -77,24 +77,27 @@ function register(event) {
     userList = JSON.parse(localStorage.getItem("userList"));
     let newUser = new Object
     for (let i in userList) {
-        if (userList[i].userName != newUserName) {
+        if (userList[i].userName.includes(newUserName)) {
+            alert(`Tên đăng nhập ${newUserName} đã tồn tại`)
+            return
+        }
+        if (userList[i].userName != newUserName && userList[i].userName.includes(newUserName)) {
             console.log("newUserName", newUserName)
             validateUserName(newUserName)
             newUser.id = Date.now()
             newUser.userName = newUserName;
             break
-        } else if (userList[i].userName == newUserName) {//tên bị trùng
-            alert(`${newUserName} already exists`)
-            return
         }
     }
     validateUserPassword(newUserPassowrd)
     newUser.userPassword = newUserPassowrd
-    console.log("newUser", newUser)
+    newUser.userStatus = true
+    console.log("newUser", newUser)//đã vào
     if (newUser != {}) {
         userList.push(newUser)
+        console.log(userList);
         localStorage.setItem("userList", JSON.stringify(userList))
-        window.location.href = "/HomePage"
+
     }
 
 }
@@ -103,7 +106,7 @@ function register(event) {
 function validateUserName(name) {
     //tên ít hơn 2 chữ cái
     if (name.length < 2) {
-        alert(`Username must be at least 2 characters`)
+        alert(`Tên đăng nhập phải có ít nhất 2 ký tự`)
         return
     }
 }
@@ -111,7 +114,7 @@ function validateUserName(name) {
 //kiểm tra điều kiện của newUserPassword
 function validateUserPassword(psw) {
     if (psw.length <= 5) {
-        alert(`Password must be 6 characters`)
+        alert(`Mật khẩu phải có ít nhất 6 ký tự`)
         return
     }
 
