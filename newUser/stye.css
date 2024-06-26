@@ -28,7 +28,7 @@ body {
 .loginImg {
     width: 350px;
     height: 600px;
-    background-image: url("/Source/LoginBG.jpg");
+    background-image: url("./LoginBG.jpg");
     background-size: cover;
     background-position: center;
     border-top-left-radius: 10px;
