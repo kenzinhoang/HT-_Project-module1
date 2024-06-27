@@ -28,7 +28,7 @@ body {
 .loginImg {
     width: 350px;
     height: 600px;
-    background-image: url("./LoginBG.jpg");
+    background-image: url("../source/LoginBG.jpg");
     background-size: cover;
     background-position: center;
     border-top-left-radius: 10px;
@@ -148,6 +148,7 @@ body {
     background-color: rgb(255, 207, 96);
 }
 
+/*-------------Register------------*/
 
 /* =================================== */
 

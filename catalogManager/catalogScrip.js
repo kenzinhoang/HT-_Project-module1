@@ -20,8 +20,8 @@ function userManage(list) {
                     <th scope="row">${Number(i) + 1}</th>
                     <td>#${list[i].id}</td>
                     <td>&#129414 ${list[i].userName}</td>
-                    <td>${list[i].userStatus}
-                        <button>Edit</button>
+                    <td>${list[i].userStatus ? "Hoạt động" : "Khoá"}
+                        <button>Khoá / Mở Khoá</button>
                         </td>
                     <td>
                         <button onclick="deleteUser(${[i]})">Delete</button>

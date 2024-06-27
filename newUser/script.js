@@ -50,16 +50,27 @@ function login(event) {
     //userName check
     if (!temp) {
         alert("Người dùng không tồn tại")
+        event.target.userName.value = ""
+        event.target.userPassword.value = ""
         return
     }
 
     //userPassword check
     if (temp.userPassword != userPassword) {
         alert("Mật khẩu chưa chính xác")
+        event.target.userPassword.value = ""
+        return
+    }
+    if (!temp.userStatus) {
+        alert("Tài khoản đã bị khoá")
+        event.target.userName.value = ""
+        event.target.userPassword.value = ""
         return
     }
 
     alert(`Xin chào ${temp.userName}`)
+    event.target.userName.value = ""
+    event.target.userPassword.value = ""
 
     localStorage.setItem("userLogin", JSON.stringify(temp))
     window.location.href = "/"
@@ -81,20 +92,28 @@ function register(event) {
         userPassword: newUserPassowrd,
         userStatus: true
     }
-    let check = ""
+
     if (newUserName && newUserPassowrd && newUserRePassword) {
         if (newUserPassowrd === newUserRePassword) {
             if (newUserName.length < 2) {
                 alert(`Tên đăng nhập phải có ít nhất 2 ký tự`)
+                event.target.newUserName.value = ""
+                event.target.newUserPassword.value = ""
+                event.target.newUserRePassword.value = ""
                 return false
             } else if (newUserPassowrd.length < 5) {
                 alert(`Mật khẩu phải có ít nhất 6 ký tự`)
+                event.target.newUserPassword.value = ""
+                event.target.newUserRePassword.value = ""
                 return false
             } else {
 
                 for (let i = 0; i < userList.length; i++) {
                     if (userList[i].userName == newUserName) {
                         alert(`Tên đăng nhập ${newUserName} đã tồn tại`)
+                        event.target.newUserName.value = ""
+                        event.target.newUserPassword.value = ""
+                        event.target.newUserRePassword.value = ""
                         return false
                     }
 
@@ -109,10 +128,15 @@ function register(event) {
             }
         } else {
             alert("Mật khẩu không trùng khớp")
+            event.target.newUserPassword.value = ""
+            event.target.newUserRePassword.value = ""
             return false
         }
     } else {
         alert("Vui lòng nhập đầy đủ thông tin")
+        event.target.newUserName.value = ""
+        event.target.newUserPassword.value = ""
+        event.target.newUserRePassword.value = ""
         return false
     }
 }

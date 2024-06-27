@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+</head>
+
+<body>
+    Product page
+
+    <!-- ====================header bar =========================== -->
+    <section class="header">
+        <div class="logo">
+            <span>Yellow</span>
+            <span id="duck">Duck</span>
+        </div>
+
+        <h2>Hệ thống quản lý sinh viên</h2>
+        <div class="acc-container">
+            <div class="account-content">
+                <span>&#129414</span>
+                <b class="userNameLogin"></b>
+            </div>
+            <button onclick="localStorage.removeItem('userLogin'); 
+                    window.location.href = '/';">Logout</button>
+        </div>
+    </section>
+    <!-- ================================================================== -->
+    <div class="page-container">
+        <section class="user-navbar">
+            <ul>
+                <li>
+                    <button onclick="window.location.href =`/userManager`">user manage</button>
+                </li>
+                <li>
+                    <button onclick="window.location.href=`/catalogManager`">catalog</button>
+                </li>
+                <li><button onclick="window.location.href=`/`">manage</button></li>
+            </ul>
+        </section>
+</body>
+
+</html>
