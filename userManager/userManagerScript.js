@@ -156,5 +156,64 @@ function changeStatus(userStatus) {
 }
 
 //block √
-//sort user list
+//sort user list -----> lần chọn thứ 2 mới hoạt động
+function sortUser() {
+    let selectOp = document.querySelector(".selectName")
+    let value = selectOp.options[selectOp.selectedIndex].value
+    let sortedUserList = userList
+    if (value == 1) {
+        sortedUserList.sort((a, b) => a.userName.localeCompare(b.userName))
+        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        userManage(sortedUserList)
+
+    }
+    if (value == 2) {
+        (sortedUserList.sort((a, b) => a.userName.localeCompare(b.userName))).reverse()
+        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        userManage(sortedUserList)
+    }
+
+
+}
+
+//sort status √
+function sortStatus() {
+    let selectStatus = document.querySelector(".selectStatus")
+    let value = selectStatus.options[selectStatus.selectedIndex].value
+    let sortedUserList = userList
+    if (value == 1) {
+        sortedUserList.sort((a, b) => a.userStatus - b.userStatus)
+        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        userManage(sortedUserList)
+
+    }
+    if (value == 2) {
+        sortedUserList.sort((a, b) => b.userStatus - a.userStatus)
+        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        userManage(sortedUserList)
+    }
+
+
+}
+
+//sort id
+function sortId() {
+    let selectId = document.querySelector(".selectId")
+    let value = selectId.options[selectId.selectedIndex].value
+    let sortedUserList = userList
+    if (value == 1) {
+        sortedUserList.sort((a, b) => b.id - a.id)
+        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        userManage(sortedUserList)
+
+
+    }
+    if (value == 2) {
+        sortedUserList.sort((a, b) => a.id - b.id)
+        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        userManage(sortedUserList)
+    }
+
+
+}
 

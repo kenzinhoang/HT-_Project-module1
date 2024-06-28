@@ -64,28 +64,24 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">STT<br>
-                            <select>
-                                <option value="">Từ thấp đến cao</option>
-                                <option value="">Từ cao đến thấp</option>
-                            </select>
+                        <th scope="col">STT
                         </th>
                         <th scope="col">#ID<br>
-                            <select>
-                                <option value="">Mới nhất</option>
-                                <option value="">Cũ nhất</option>
+                            <select class="selectId" onchange="sortId()">
+                                <option value="1">Mới nhất</option>
+                                <option value="2">Cũ nhất</option>
                             </select>
                         </th>
                         <th scope="col">&#129414 Tên tài khoản (User)<br>
-                            <select>
-                                <option value="">A -> Z</option>
-                                <option value="">Z -> A</option>
+                            <select class="selectName" onchange="sortUser()">
+                                <option value="1">A -> Z</option>
+                                <option value="2">Z -> A</option>
                             </select>
                         </th>
                         <th scope="col">Trạng thái (status)<br>
-                            <select>
-                                <option value="">Khoá</option>
-                                <option value="">Hoạt động</option>
+                            <select class="selectStatus" onchange="sortStatus()">
+                                <option value="1">Khoá</option>
+                                <option value="2">Hoạt động</option>
                             </select>
                         </th>
                         <th scope="col">Tools<br>
