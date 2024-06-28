@@ -217,3 +217,23 @@ function sortId() {
 
 }
 
+//search ---> lỗi nút chức năng
+function search() {
+    let users = userList
+    let keyword = document.querySelector(".searchInput").value
+    console.log("kw", keyword);
+    let result = []
+    for (let i in users) {
+        if (keyword == "") {
+            alert("Hãy nhập thông tin")
+            return
+        }
+        if ((users[i].userName).includes(keyword) == true) {
+            result.push(users[i])
+        }
+    }
+
+
+    userManage(result)
+}
+
