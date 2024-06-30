@@ -237,3 +237,30 @@ function search() {
     userManage(result)
 }
 
+
+let limit = 6
+let nowPage = 0
+let numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+function loadItem() {
+    let thisPage = 1
+    let count = Math.ceil(numberList.length / limit)
+
+
+    let pageBtnList = ""
+    for (let i = 0; i < count; i++) {
+        pageBtnList += `
+        <button>${i + 1}</button>`
+
+    }
+    document.querySelector(".listPage").innerHTML = pageBtnList
+}
+loadItem()
+
+function pageLoad() {
+    let beginGet = nowPage * limit
+    let endGet = beginGet * thisPage
+    let emptyArr = []
+    for (let i = beginGet; i < endGet; i++) {
+        emptyArr.push(numberList[i])
+    }
+}
