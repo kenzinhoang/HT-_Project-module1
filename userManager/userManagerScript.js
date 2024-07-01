@@ -50,10 +50,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /*========================User manage========================*/
 let userList = JSON.parse(localStorage.getItem("userList"))
+// let mark = false
+// if (document.querySelector(".searchInput").value != "") {
+//     mark = true
+// }
 
+
+//manage user --------------> ok
 function userManage(list) {
-    //console.log("userList", list);
-    let tbody = document.querySelector(".user-manage .table tbody")
+
     let user = ""
     for (let i in list) {
         user += `
@@ -62,28 +67,37 @@ function userManage(list) {
                     <td>#${list[i].id}</td>
                     <td>&#129414 ${list[i].userName}</td>
                     <td>${list[i].userStatus ? "Hoạt động" : "Khoá"}
-                        <button onclick="changeStatus(${[i]})">Khoá / Mở Khoá</button>
+                        <button onclick="changeStatus(${list[i].id})">Khoá / Mở Khoá</button>
                         </td>
                     <td>
-                        <button onclick="deleteUser(${[i]})">Delete</button>
+                        <button onclick="deleteUser(${list[i].id})">Delete</button>
                     </td>
                 </tr>
         `
     }
-    tbody.innerHTML = user
+    document.querySelector(".user-manage .table tbody").innerHTML = user
 }
 userManage(userList)
 
+
 //delete User --------------> ok
-function deleteUser(user) {
-    console.log(user)
-    userList.splice(user, 1)
-    localStorage.setItem("userList", JSON.stringify(userList))
-    userManage(userList)
+function deleteUser(target) {
+
+    console.log("delete", target)
+    for (let i in userList) {
+        if (target == userList[i].id) {
+            userList.splice(i, 1)
+            localStorage.setItem("userList", JSON.stringify(userList))
+            break
+        }
+    }
+
+    printPageList(userList)
+
 }
 
 
-//Thêm user 
+//Thêm user ------->ok
 function register(event) {
     event.preventDefault();
     let newUserName = event.target.newUserName.value;
@@ -121,10 +135,10 @@ function register(event) {
                     }
 
                 }
-
+                //out put
                 userList.push(newUser)
                 localStorage.setItem("userList", JSON.stringify(userList))
-                userManage(userList)
+                printPageList(userList)
                 event.target.newUserName.value = ""
                 event.target.newUserPassword.value = ""
                 event.target.newUserRePassword.value = ""
@@ -147,32 +161,40 @@ function register(event) {
 
 }
 
-//change status ------> ok
-function changeStatus(userStatus) {
-    console.log(userStatus);
-    userList[userStatus].userStatus = !userList[userStatus].userStatus
-    localStorage.setItem("userList", JSON.stringify(userList))
-    userManage(userList)
+//change status ------> √
+function changeStatus(target) {
+    console.log("status", target);
+    for (let i in userList) {
+        if (target == userList[i].id) {
+            userList[i].userStatus = !userList[i].userStatus
+            localStorage.setItem("userList", JSON.stringify(userList))
+            break
+        }
+    }
+    printPageList(userList)
 }
 
 //block √
+
+//-------------------Sort------------------------------------------
 //sort user list -----> lần chọn thứ 2 mới hoạt động
 function sortUser() {
     let selectOp = document.querySelector(".selectName")
     let value = selectOp.options[selectOp.selectedIndex].value
-    let sortedUserList = userList
+    let sortUserList = userList
     if (value == 1) {
-        sortedUserList.sort((a, b) => a.userName.localeCompare(b.userName))
+        sortUserList.sort((a, b) => a.userName.localeCompare(b.userName))
         document.querySelector(".user-manage .table tbody").innerHTML = ""
-        userManage(sortedUserList)
+        userManage(sortUserList)
+
 
     }
     if (value == 2) {
-        (sortedUserList.sort((a, b) => a.userName.localeCompare(b.userName))).reverse()
+        (sortUserList.sort((a, b) => a.userName.localeCompare(b.userName))).reverse()
         document.querySelector(".user-manage .table tbody").innerHTML = ""
-        userManage(sortedUserList)
+        userManage(sortUserList)
     }
-
+    printPageList(sortUserList)
 
 }
 
@@ -180,45 +202,50 @@ function sortUser() {
 function sortStatus() {
     let selectStatus = document.querySelector(".selectStatus")
     let value = selectStatus.options[selectStatus.selectedIndex].value
-    let sortedUserList = userList
+    let sortUserList = userList
     if (value == 1) {
-        sortedUserList.sort((a, b) => a.userStatus - b.userStatus)
+        sortUserList.sort((a, b) => a.userStatus - b.userStatus)
         document.querySelector(".user-manage .table tbody").innerHTML = ""
-        userManage(sortedUserList)
+        userManage(sortUserList)
+
 
     }
     if (value == 2) {
-        sortedUserList.sort((a, b) => b.userStatus - a.userStatus)
+        sortUserList.sort((a, b) => b.userStatus - a.userStatus)
         document.querySelector(".user-manage .table tbody").innerHTML = ""
-        userManage(sortedUserList)
-    }
+        userManage(sortUserList)
 
+    }
+    printPageList(sortUserList)
 
 }
 
-//sort id
+//sort id √
 function sortId() {
     let selectId = document.querySelector(".selectId")
     let value = selectId.options[selectId.selectedIndex].value
-    let sortedUserList = userList
+    let sortUserList = userList
     if (value == 1) {
-        sortedUserList.sort((a, b) => b.id - a.id)
+        sortUserList.sort((a, b) => b.id - a.id)
         document.querySelector(".user-manage .table tbody").innerHTML = ""
-        userManage(sortedUserList)
+        userManage(sortUserList)
+
 
 
     }
     if (value == 2) {
-        sortedUserList.sort((a, b) => a.id - b.id)
+        sortUserList.sort((a, b) => a.id - b.id)
         document.querySelector(".user-manage .table tbody").innerHTML = ""
-        userManage(sortedUserList)
+        userManage(sortUserList)
     }
 
-
+    printPageList(sortUserList)
 }
 
 //search ---> lỗi nút chức năng
+// ---> nút chức năng hđộng nhưng sẽ trả phân loại page về ban đầu (line:167 vv)
 function search() {
+
     let users = userList
     let keyword = document.querySelector(".searchInput").value
     console.log("kw", keyword);
@@ -233,34 +260,50 @@ function search() {
         }
     }
 
-
     userManage(result)
+    printPageList(result)
 }
+//------------------------------------------------------------
 
 
+//--------------PAGINATION -----------------------
 let limit = 6
 let nowPage = 0
-let numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-function loadItem() {
-    let thisPage = 1
-    let count = Math.ceil(numberList.length / limit)
 
+function printPageList(target) {
+    let pageCount = Math.ceil(target.length / limit);
+    console.log(pageCount);
 
-    let pageBtnList = ""
-    for (let i = 0; i < count; i++) {
+    let pageBtnList = ``;
+    for (let i = 0; i < pageCount; i++) {
         pageBtnList += `
-        <button>${i + 1}</button>`
-
+            <button onclick="changePage(${i})" style="color: ${nowPage == i ? "red" : ""}">${i + 1}</button>
+        `
     }
-    document.querySelector(".listPage").innerHTML = pageBtnList
+    document.querySelector(".listPage").innerHTML = pageBtnList;
+    pageLoad(target)
 }
-loadItem()
 
-function pageLoad() {
+printPageList(userList)
+
+function pageLoad(target) {
+    console.log("pageload", target);
     let beginGet = nowPage * limit
-    let endGet = beginGet * thisPage
+    let endGet = beginGet + limit
     let emptyArr = []
     for (let i = beginGet; i < endGet; i++) {
-        emptyArr.push(numberList[i])
+        if (target[i]) {
+            emptyArr.push(target[i])
+        } else {
+            break
+        }
     }
+    userManage(emptyArr)
+}
+
+
+function changePage(page) {
+    nowPage = page;
+    printPageList(userList)
+    pageLoad(userList)
 }
