@@ -7,86 +7,178 @@ document.querySelector(".userNameLogin").innerText = user.userName;
 /*=================================================================*/
 
 
-/*========================User manage========================*/
-let userList = JSON.parse(localStorage.getItem("userList"))
 
-function userManage(list) {
-    //console.log("userList", list);
-    let tbody = document.querySelector(".user-manage .table tbody")
-    let user = ""
-    for (let i in list) {
-        user += `
+
+/*========================Catalog manage========================*/
+
+// let categoryList = [
+//     {
+//         id: 1,
+//         name: "Điện thoại"
+//     }, {
+//         id: 2,
+//         name: "Máy tính bảng"
+//     }, {
+//         id: 3,
+//         name: "Laptop",
+//     }, {
+//         id: 4,
+//         name: "Máy ảnh"
+//     }, {
+//         id: 5,
+//         name: "Phụ kiện"
+//     }
+// ]
+// localStorage.setItem("categoryList", JSON.stringify(categoryList));
+let categoryList = JSON.parse(localStorage.getItem("categoryList"));
+
+
+//-----------------------------Category Render ---------------------------
+function renderData(target) {
+    let cataData = ""
+    for (let i in target) {
+        cataData +=
+            `
                 <tr>
-                    <th scope="row">${Number(i) + 1}</th>
-                    <td>#${list[i].id}</td>
-                    <td>&#129414 ${list[i].userName}</td>
-                    <td>${list[i].userStatus ? "Hoạt động" : "Khoá"}
-                        <button>Khoá / Mở Khoá</button>
-                        </td>
                     <td>
-                        <button onclick="deleteUser(${[i]})">Delete</button>
+                    <input type="text" id="${target[i].id}" value="${target[i].name}"readonly>
+                    </td>
+                    <td>
+                        <button class="btn${target[i].id}"" onclick="editCatalog(${target[i].id}) ">Edit</button>
+                        <button onclick="deleteCatalog(${target[i].id})">Delete</button>
                     </td>
                 </tr>
+            `
+
+    }
+
+    document.querySelector(".table tbody").innerHTML = cataData
+}
+//renderData(JSON.parse(localStorage.getItem("categoryList")))
+renderData(categoryList)
+
+//--------------PAGINATION -----------------------
+let limit = 3
+let nowPage = 0
+
+function printPageList(target) {
+    let pageCount = Math.ceil(target.length / limit);
+
+    let pageBtnList = ``;
+    for (let i = 0; i < pageCount; i++) {
+        pageBtnList += `
+            <button onclick="changePage(${i})" style="background-color: ${nowPage == i ? "gold" : ""}">${i + 1}</button>
         `
     }
-    tbody.innerHTML = user
-}
-userManage(userList)
-
-//delete User --------------> ok
-function deleteUser(user) {
-    console.log(user)
-    userList.splice(user, 1)
-    localStorage.setItem("userList", JSON.stringify(userList))
-    userManage(userList)
+    document.querySelector(".listPage").innerHTML = pageBtnList;
+    pageLoad(target)
 }
 
+printPageList(categoryList)
 
-//Thêm user  ------------------> bug in MacOS
-
-
-function register(event) {
-    event.preventDefault();
-    let newUserName = event.target.newUserName.value;
-    let newUserPassowrd = event.target.newUserPassword.value;
-    let newUserRePassword = event.target.newUserRePassword.value
-    userList = JSON.parse(localStorage.getItem("userList"));
-    let newUser = {
-        id: Date.now(),
-        userName: newUserName,
-        userPassword: newUserPassowrd,
-        userStatus: true
+function pageLoad(target) {
+    let beginGet = nowPage * limit
+    let endGet = beginGet + limit
+    let emptyArr = []
+    for (let i = beginGet; i < endGet; i++) {
+        if (target[i]) {
+            emptyArr.push(target[i])
+        } else {
+            break
+        }
     }
-    if (newUserName && newUserPassowrd && newUserRePassword) {
-        if (newUserPassowrd === newUserRePassword) {
-            if (newUserName.length < 2) {
-                alert(`Tên đăng nhập phải có ít nhất 2 ký tự`)
-                return false
-            } else if (newUserPassowrd.length < 5) {
-                alert(`Mật khẩu phải có ít nhất 6 ký tự`)
+    renderData(emptyArr)
+}
+
+
+function changePage(page) {
+    nowPage = page;
+    printPageList(categoryList)
+    pageLoad(categoryList)
+}
+
+//-----------------Add catalog--------------------
+function addData() {
+    let inputData = document.querySelector(".addCatalog").value
+    let newCatalog = {
+        id: Date.now(),
+        name: inputData
+    }
+    if (inputData != "") {
+        for (let i in categoryList) {
+            if (inputData.trim() == categoryList[i].name && inputData.toLowerCase() == categoryList[i].name.toLowerCase()) {
+                alert("Tên đã tồn tại")
                 return false
             } else {
-
-                for (let i = 0; i < userList.length; i++) {
-                    if (userList[i].userName == newUserName) {
-                        alert(`Tên đăng nhập ${newUserName} đã tồn tại`)
-                        return false
-                    }
-
-                }
-
-                userList.push(newUser)
-                localStorage.setItem("userList", JSON.stringify(userList))
-                userManage(userList)
+                //outPut
+                categoryList.push(newCatalog)
+                localStorage.setItem("categoryList", JSON.stringify(categoryList))
+                printPageList(categoryList)
+                document.querySelector(".addCatalog").value = ""
                 return true
-
             }
-        } else {
-            alert("Mật khẩu không trùng khớp")
-            return false
         }
     } else {
-        alert("Vui lòng nhập đầy đủ thông tin")
+        alert("Tên không được để trống")
         return false
+    }
+}
+
+//------------Delete catalog----------------------
+function deleteCatalog(target) {
+    console.log("delete", target)
+    for (let i in categoryList) {
+        if (target == categoryList[i].id) {
+            categoryList.splice(i, 1)
+            localStorage.setItem("categoryList", JSON.stringify(categoryList))
+            break
+        }
+    }
+
+    printPageList(categoryList)
+}
+let checkEdit = false
+//------------Edit catalog----------------------
+function editCatalog(target) {
+
+    if (checkEdit == false) {
+        document.querySelector(`#${CSS.escape(target)}`).removeAttribute("readonly")
+        document.querySelector(`.btn${CSS.escape(target)}`).textContent = "Apply"
+        checkEdit = true
+
+    } else if (checkEdit == true) {
+        document.querySelector(`#${CSS.escape(target)}`).setAttribute("readonly", "readonly")
+        document.querySelector(`.btn${CSS.escape(target)}`).textContent = "Edit"
+        let edited = document.querySelector(`#${CSS.escape(target)}`).value
+        for (let i in categoryList) {
+            if (categoryList[i].id == target) {
+                categoryList[i].name = edited
+                localStorage.setItem("categoryList", JSON.stringify(categoryList))
+                checkEdit = false
+                break
+            }
+        }
+
+    }
+
+
+}
+
+//-------------Search catalog----------------
+function search() {
+    let inputData = document.querySelector(".searchData").value
+    let output = categoryList
+    let searchResult = []
+    for (let i in categoryList) {
+        if (inputData == "") {
+            renderData(JSON.parse(localStorage.getItem("categoryList")))
+            printPageList(JSON.parse(localStorage.getItem("categoryList")))
+
+        }
+        if ((output[i].name).includes(inputData) == true) {
+            searchResult.push(output[i])
+            renderData(searchResult)
+            printPageList(searchResult)
+        }
     }
 }

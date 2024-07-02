@@ -14,29 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // sử dụng preventDefault để hủy mặc định của thể form 
     document.querySelector(".addUserBtn").addEventListener("click", function (event) {
         event.preventDefault();
+
         if (check == false) {
-            content = `
-                <form action="" onsubmit="register(event)">
-                    <div class="item">
-                        <span>Tên đăng nhập</span>
-                        <input name="newUserName" type="text" placeholder="Nhập tên đăng nhập" required>
-                        <i>*Tên đăng nhập phải có ít nhất 2 ký tự</i>
-                    </div>
-                    <div class="item">
-                        <span>Mật Khẩu</span>
-                        <input name="newUserPassword" type="password" placeholder="Nhập mật khẩu" required>
-                        <i>*Mật khẩu phải có ít nhất 6 ký tự</i>
-                        <input name="newUserRePassword" type="password" placeholder="Nhập lại mật khẩu" required>
-                    </div>
-                    <button type="submit">Đăng ký</button>
-                </form>`
+            console.log("da vao1");
+            //content = 
             check = true
-            document.querySelector(".user-manage-tools").innerHTML = content
+            document.querySelector(".user-manage-tools").querySelector("form").classList.add("active")
             return
         } else {
             content = ""
             check = false
-            document.querySelector(".user-manage-tools").innerHTML = content
+            document.querySelector(".user-manage-tools").querySelector("form").classList.remove("active")
             return
         }
 
@@ -179,6 +167,12 @@ function changeStatus(target) {
 //-------------------Sort------------------------------------------
 //sort user list -----> lần chọn thứ 2 mới hoạt động
 function sortUser() {
+    document.querySelector("#sort1").setAttribute("selected", "selected")
+    document.querySelector("#sort3").setAttribute("selected", "selected")
+
+
+
+    //---------------------------------------------------//
     let selectOp = document.querySelector(".selectName")
     let value = selectOp.options[selectOp.selectedIndex].value
     let sortUserList = userList
@@ -200,6 +194,8 @@ function sortUser() {
 
 //sort status √
 function sortStatus() {
+    document.querySelector("#sort1").setAttribute("selected", "selected")
+    document.querySelector("#sort2").setAttribute("selected", "selected")
     let selectStatus = document.querySelector(".selectStatus")
     let value = selectStatus.options[selectStatus.selectedIndex].value
     let sortUserList = userList
@@ -222,6 +218,8 @@ function sortStatus() {
 
 //sort id √
 function sortId() {
+    document.querySelector("#sort2").setAttribute("selected", "selected")
+    document.querySelector("#sort3").setAttribute("selected", "selected")
     let selectId = document.querySelector(".selectId")
     let value = selectId.options[selectId.selectedIndex].value
     let sortUserList = userList
@@ -242,8 +240,7 @@ function sortId() {
     printPageList(sortUserList)
 }
 
-//search ---> lỗi nút chức năng
-// ---> nút chức năng hđộng nhưng sẽ trả phân loại page về ban đầu (line:167 vv)
+//search ---> lỗi 1 so chuc nang
 function search() {
 
     let users = userList
@@ -252,16 +249,18 @@ function search() {
     let result = []
     for (let i in users) {
         if (keyword == "") {
-            alert("Hãy nhập thông tin")
-            return
+            userManage(JSON.parse(localStorage.getItem("userList")))
+            printPageList(JSON.parse(localStorage.getItem("userList")))
+
         }
         if ((users[i].userName).includes(keyword) == true) {
             result.push(users[i])
+            userManage(result)
+            printPageList(result)
         }
     }
 
-    userManage(result)
-    printPageList(result)
+
 }
 //------------------------------------------------------------
 
@@ -277,7 +276,7 @@ function printPageList(target) {
     let pageBtnList = ``;
     for (let i = 0; i < pageCount; i++) {
         pageBtnList += `
-            <button onclick="changePage(${i})" style="color: ${nowPage == i ? "red" : ""}">${i + 1}</button>
+            <button onclick="changePage(${i})" style="background-color: ${nowPage == i ? "gold" : ""}">${i + 1}</button>
         `
     }
     document.querySelector(".listPage").innerHTML = pageBtnList;

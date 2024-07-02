@@ -10,28 +10,28 @@ document.querySelector(".userNameLogin").innerText = user.userName;
 /*========================User manage========================*/
 let userList = JSON.parse(localStorage.getItem("userList"))
 
-function userManage(list) {
-    //console.log("userList", list);
-    let tbody = document.querySelector(".user-manage .table tbody")
-    let user = ""
-    for (let i in list) {
-        user += `
-                <tr>
-                    <th scope="row">${Number(i) + 1}</th>
-                    <td>#${list[i].id}</td>
-                    <td>&#129414 ${list[i].userName}</td>
-                    <td>${list[i].userStatus}
-                        <button>Edit</button>
-                        </td>
-                    <td>
-                        <button onclick="deleteUser(${[i]})">Delete</button>
-                    </td>
-                </tr>
-        `
-    }
-    tbody.innerHTML = user
-}
-userManage(userList)
+// function userManage(list) {
+//     //console.log("userList", list);
+//     let tbody = document.querySelector(".user-manage .table tbody")
+//     let user = ""
+//     for (let i in list) {
+//         user += `
+//                 <tr>
+//                     <th scope="row">${Number(i) + 1}</th>
+//                     <td>#${list[i].id}</td>
+//                     <td>&#129414 ${list[i].userName}</td>
+//                     <td>${list[i].userStatus}
+//                         <button>Edit</button>
+//                         </td>
+//                     <td>
+//                         <button onclick="deleteUser(${[i]})">Delete</button>
+//                     </td>
+//                 </tr>
+//         `
+//     }
+//     tbody.innerHTML = user
+// }
+// userManage(userList)
 
 //delete User --------------> ok
 function deleteUser(user) {
