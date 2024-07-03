@@ -54,10 +54,20 @@
         <section class="catalogBox">
             <h3>Danh mục</h3>
             <div class="categoryNavBar">
-                <input type="text" placeholder="&#128269; Bạn cần tìm gì ?">
+                <input type="text" class="searchData" placeholder="&#128269; Bạn cần tìm gì ?">
                 <div>
-                    <input type="text">
-                    <button>Add</button>
+                    <span>add item</span>
+                    <form onsubmit="addProduct(event)">
+                        <input type="text" class="productName" placeholder="Nhập tên">
+                        <input type="text" class="productQuality" placeholder="Nhập số lượng">
+                        <input type="text" class="productValue" placeholder="Nhập giá trị">
+                        <span>Loai
+                            <select class="productCatalog"></select>
+                        </span>
+
+                        <button type="submit">Add</button>
+                    </form>
+
                 </div>
             </div>
 
@@ -69,7 +79,8 @@
 
             <table class="table">
                 <thead>
-                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tên</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Giá trị</th>
                     <th scope="col">Loại</th>
@@ -80,7 +91,7 @@
                 </tbody>
 
             </table>
-            <div><button>1</button></div>
+            <div class="listPage"></div>
         </section>
 
 

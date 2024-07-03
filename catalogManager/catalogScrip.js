@@ -44,7 +44,7 @@ function renderData(target) {
                     <input type="text" id="${target[i].id}" value="${target[i].name}"readonly>
                     </td>
                     <td>
-                        <button class="btn${target[i].id}"" onclick="editCatalog(${target[i].id}) ">Edit</button>
+                        <button class="btn${target[i].id}" onclick="editCatalog(${target[i].id}) ">Edit</button>
                         <button onclick="deleteCatalog(${target[i].id})">Delete</button>
                     </td>
                 </tr>
@@ -104,6 +104,7 @@ function addData() {
         id: Date.now(),
         name: inputData
     }
+
     if (inputData != "") {
         for (let i in categoryList) {
             if (inputData.trim() == categoryList[i].name && inputData.toLowerCase() == categoryList[i].name.toLowerCase()) {
@@ -137,8 +138,9 @@ function deleteCatalog(target) {
 
     printPageList(categoryList)
 }
-let checkEdit = false
+
 //------------Edit catalog----------------------
+let checkEdit = false
 function editCatalog(target) {
 
     if (checkEdit == false) {

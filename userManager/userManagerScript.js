@@ -80,7 +80,10 @@ function deleteUser(target) {
         }
     }
 
-    printPageList(userList)
+    let result = search()
+    if (result.length < 0) {
+        printPageList(userList)
+    }
 
 }
 
@@ -159,7 +162,13 @@ function changeStatus(target) {
             break
         }
     }
-    printPageList(userList)
+    let result = search()
+    if (result.length < 0) {
+        printPageList(userList)
+    }
+
+
+
 }
 
 //block √
@@ -167,8 +176,9 @@ function changeStatus(target) {
 //-------------------Sort------------------------------------------
 //sort user list -----> lần chọn thứ 2 mới hoạt động
 function sortUser() {
-    document.querySelector("#sort1").setAttribute("selected", "selected")
-    document.querySelector("#sort3").setAttribute("selected", "selected")
+    document.querySelector("#sort1").selected = true
+    document.querySelector("#sort3").selected = true
+    console.dir(document.querySelector("#sort1"));
 
 
 
@@ -194,8 +204,8 @@ function sortUser() {
 
 //sort status √
 function sortStatus() {
-    document.querySelector("#sort1").setAttribute("selected", "selected")
-    document.querySelector("#sort2").setAttribute("selected", "selected")
+    document.querySelector("#sort1").selected = true
+    document.querySelector("#sort2").selected = true
     let selectStatus = document.querySelector(".selectStatus")
     let value = selectStatus.options[selectStatus.selectedIndex].value
     let sortUserList = userList
@@ -218,8 +228,8 @@ function sortStatus() {
 
 //sort id √
 function sortId() {
-    document.querySelector("#sort2").setAttribute("selected", "selected")
-    document.querySelector("#sort3").setAttribute("selected", "selected")
+    document.querySelector("#sort2").selected = true
+    document.querySelector("#sort3").selected = true
     let selectId = document.querySelector(".selectId")
     let value = selectId.options[selectId.selectedIndex].value
     let sortUserList = userList
@@ -259,7 +269,7 @@ function search() {
             printPageList(result)
         }
     }
-
+    return result
 
 }
 //------------------------------------------------------------
