@@ -72,8 +72,8 @@ function renderData(target) {
                                 <input type="text"  value="${target[i].category}"readonly>
                             </th>
                             <th>
-                                <button class="btn${target[i].id}" onclick="editData(${target[i].id}) ">Edit</button>
-                                <button onclick="deleteData(${target[i].id})">Xoá</button>
+                                <button class="btn btn-outline-info" id="btn${target[i].id}" onclick="editData(${target[i].id}) ">Edit</button>
+                                <button  class="btn btn-outline-danger"onclick="deleteData(${target[i].id})">Delete</button>
                             </th>
                             </tr>
 
@@ -106,14 +106,14 @@ function editData(target) {
         document.querySelector(`#name${CSS.escape(target)}`).removeAttribute("readonly")
         document.querySelector(`#quality${CSS.escape(target)}`).removeAttribute("readonly")
         document.querySelector(`#value${CSS.escape(target)}`).removeAttribute("readonly")
-        document.querySelector(`.btn${CSS.escape(target)}`).textContent = "Apply"
+        document.querySelector(`#btn${CSS.escape(target)}`).textContent = "Apply"
         checkEdit = true
 
     } else if (checkEdit == true) {
         document.querySelector(`#name${CSS.escape(target)}`).setAttribute("readonly", "readonly") //.readonly =true
         document.querySelector(`#quality${CSS.escape(target)}`).setAttribute("readonly", "readonly")
         document.querySelector(`#value${CSS.escape(target)}`).setAttribute("readonly", "readonly")
-        document.querySelector(`.btn${CSS.escape(target)}`).textContent = "Edit"
+        document.querySelector(`#btn${CSS.escape(target)}`).textContent = "Edit"
         let editedName = document.querySelector(`#name${CSS.escape(target)}`).value
         let editedQuality = document.querySelector(`#quality${CSS.escape(target)}`).value
         let editedValue = document.querySelector(`#value${CSS.escape(target)}`).value
@@ -137,9 +137,9 @@ function editData(target) {
 //-----------add new product-----------------
 function addProduct(event) {
     event.preventDefault();
-    let productName = document.querySelector(".productName").value.trim();
-    let productQuality = document.querySelector(".productQuality").value;
-    let productValue = document.querySelector(".productValue").value;
+    let productName = event.target.productName.value.trim();
+    let productQuality = event.target.productQuality.value;
+    let productValue = event.target.productValue.value;
     let newProduct = {
         id: Date.now().toString(),
         name: productName,
@@ -151,20 +151,7 @@ function addProduct(event) {
     productList.push(newProduct)
     renderData(productList)
 
-    // if (productCategory < 0) {
-    //     alert("Chưa có loại sản phẩm")
-    //     return false
-    // } else {
-    //     let newProduct = {
-    //         id: Date.now().toString(),
-    //         name: productName,
-    //         quality: productQuality,
-    //         value: productValue,
-    //         category: productCategory,
-    //     }
-    //     productList.push(newProduct)
-    //     renderCategory(productList)
-    // }
+
 }
 
 //--------------PAGINATION-----------------------
@@ -176,7 +163,7 @@ function printPageList(target) {
     let pageBtnList = ``;
     for (let i = 0; i < pageCount; i++) {
         pageBtnList += `
-            <button onclick="changePage(${i})" style="background-color: ${nowPage == i ? "gold" : ""}">${i + 1}</button>
+            <button class="btn btn-secondary" onclick="changePage(${i})" style="background-color: ${nowPage == i ? "rgb(57, 89, 143)" : ""}">${i + 1}</button>
         `
     }
     document.querySelector(".listPage").innerHTML = pageBtnList;
@@ -209,7 +196,7 @@ function changePage(page) {
 
 //-----------search----------------
 function search() {
-    let inputData = document.querySelector(".searchData").value
+    let inputData = document.querySelector(".form-control").value
     let output = productList
     let searchResult = []
     for (let i in productList) {

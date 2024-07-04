@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url("/Source/LoginBG.jpg");
+    /* background-image: url("/Source/LoginBG.jpg"); */
     background-size: cover;
 }
 
@@ -21,7 +21,6 @@ body {
 
 .header {
     height: 70px;
-
     background-color: rgb(57, 89, 143);
     display: flex;
     align-items: right;
@@ -30,22 +29,6 @@ body {
 
 }
 
-
-.header .logo {
-    padding: 5px;
-    border-radius: 10px;
-    color: white;
-    background-color: bisque;
-    font-weight: bold;
-    width: 70px;
-    text-align: center;
-    border: 3px solid rgb(57, 89, 143);
-    border-style: dashed;
-}
-
-.header .logo #duck {
-    font-size: 18px;
-}
 
 
 .header h2 {
@@ -58,12 +41,24 @@ body {
     width: 200px;
     padding: 5px 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header .acc-container b {
     text-transform: uppercase;
     color: white;
+    padding-right: 5px;
 
+}
+
+.header .acc-container button {
+    font-size: 10px;
+    width: 40px;
+    padding: 0px;
+    background-color: antiquewhite;
+    font-weight: bold;
 }
 
 .header button {
@@ -72,6 +67,7 @@ body {
     background-color: white;
     color: rgb(57, 89, 143);
     padding: 2px 7px;
+
 }
 
 .offcanvas-header {
@@ -139,7 +135,71 @@ body {
 
 }
 
+.page-containerBox {
+    display: flex;
+    justify-content: center;
+}
+
 .contentBox {
-    padding: 20px;
+    width: 1050px;
+    height: 800px;
+    margin: 0px 50px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: -2px 12px 19px -8px rgba(0, 0, 0, 0.55);
+    -webkit-box-shadow: -2px 12px 19px -8px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: -2px 12px 19px -8px rgba(0, 0, 0, 0.55);
+}
+
+.contentBoxHead {
+    background-color: rgb(57, 89, 143);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    padding: 2px;
+}
+
+.contentBoxBody {
+    position: relative;
+    background-image: url(./source/BGhome.jpg);
+    background-size: cover;
+    background-position: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.contentBoxData {
+    /* background-color: brown; */
+
+    display: flex;
+    width: auto;
+    height: 769px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: white;
+
+
+}
+
+.contentBoxBody img {
+    width: 120px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    top: 453px;
+
+}
+
+#menuBtn {
+    width: 60px;
+}
+
+#menuBtn:hover {
+    background-color: rgb(57, 89, 143);
+    color: white;
+    border: 1px solid white;
 
 }

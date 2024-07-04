@@ -6,28 +6,24 @@
 
 }
 
-body {
-    background-image: url("../source/LoginBG.jpg");
-    background-size: cover;
-}
+
 
 /*-----------------------Header-------------------*/
 
-.page-container {
+.page-containerBox {
     display: flex;
+    justify-content: center;
 }
 
 .header {
-    background-color: white;
+    height: 70px;
+    background-color: rgb(57, 89, 143);
     display: flex;
-    align-items: center;
+    align-items: right;
     justify-content: space-evenly;
     padding: 10px 0px;
-    box-shadow: 0px 15px 16px -2px rgba(0, 0, 0, 0.57);
-    -webkit-box-shadow: 0px 15px 16px -2px rgba(0, 0, 0, 0.57);
-    -moz-box-shadow: 0px 15px 16px -2px rgba(0, 0, 0, 0.57);
-}
 
+}
 
 .header .logo {
     padding: 5px;
@@ -41,27 +37,35 @@ body {
     border-style: dashed;
 }
 
-.header .logo #duck {
-    font-size: 18px;
-}
-
 
 .header h2 {
-    color: rgb(57, 89, 143);
+    color: white;
 }
 
 .header .acc-container {
-    background-color: rgb(57, 89, 143);
+    /* background-color: rgb(57, 89, 143); */
     border-radius: 10px;
-    width: 100px;
+    width: 200px;
     padding: 5px 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header .acc-container b {
     text-transform: uppercase;
     color: white;
+    padding-right: 5px;
 
+}
+
+.header .acc-container button {
+    font-size: 10px;
+    width: 40px;
+    padding: 0px;
+    background-color: antiquewhite;
+    font-weight: bold;
 }
 
 .header button {
@@ -69,27 +73,214 @@ body {
     border-radius: 5px;
     background-color: white;
     color: rgb(57, 89, 143);
-    padding: 2px 7px;
+    font-size: 15px;
+}
+
+.offcanvas-header {
+    background-color: rgb(57, 89, 143);
+}
+
+#offcanvasExample {
+    background-color: white;
+    width: 200px;
 }
 
 
 /* ============================User manage=========================== */
-.user-manage {
-    margin: 30px 20px;
-    padding: 10px;
+.user-navbar li {
+    list-style-type: none;
+    padding: 20px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid rgb(57, 89, 143);
+
+}
+
+.user-navbar li button:hover {
+    color: rgb(57, 89, 143);
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+
+.user-navbar li button {
+    border: none;
+    background-color: white;
     width: auto;
-    height: 1000px;
+}
+
+.user-navbar ul {
+    list-style-type: none;
+    padding: 0px;
+    font-size: 16px;
+
+}
+
+.offcanvas-title {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.offcanvas-body {
+    padding: 0px;
+}
+
+
+.pageContainer {
+    padding-top: 20px;
+
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.contentBox {
+    width: 1050px;
+    height: auto;
+    margin: 0px 0px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: -2px 12px 19px -8px rgba(0, 0, 0, 0.55);
+    -webkit-box-shadow: -2px 12px 19px -8px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: -2px 12px 19px -8px rgba(0, 0, 0, 0.55);
+
+}
+
+.contentBoxHead {
+    background-color: rgb(57, 89, 143);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    padding: 2px;
+}
+
+.contentBoxBody {
+    align-items: center;
+    padding: 10px;
+
+}
+
+/* ---ds tai khoan---- */
+
+.user-manage-navbar {
+    justify-content: space-between;
+
+
+}
+
+/*------------search----------*/
+.search {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+#searchBtn {
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border: none;
+    border-radius: 8px;
+    margin-left: 5px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+
+}
+
+/*------addUser-----*/
+
+
+.btnAddUsers {
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border: none;
+    border-radius: 8px;
+    margin-left: 5px;
+    width: 50px;
+    height: 50px;
     background-color: white;
 }
 
-.user-manage .user-manage-navbar {
-    display: flex;
-    justify-content: space-between;
-    font-size: 20px;
+
+/*------add user form -------------*/
+.user-manage-tools form {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(57, 89, 143);
 }
 
+.user-manage-tools span {
+    background-color: antiquewhite;
+}
+
+.input-group-text {
+    width: 140px;
+
+}
+
+/*------render data-------*/
+.contentBoxData h5 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+/*-------table-----*/
+.table .thead th {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 500px;
+    height: 50px;
+}
+
+.tbTitle {
+    color: white;
+}
+
+.table select {
+    border: none;
+}
+
+/*page*/
+.listPage {
+    text-align: center;
+
+}
+
+
+
+.contentBoxData .table {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+/* ------------------------Menu btn----------- */
+#menuBtn {
+    width: 60px;
+}
+
+#menuBtn:hover {
+    background-color: rgb(57, 89, 143);
+    color: white;
+    border: 1px solid white;
+
+}
+
+/* ---------------form hiding ----------- */
 .user-manage-tools form {
     display: none;
+
 }
 
 .user-manage-tools form.active {

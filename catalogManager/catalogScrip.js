@@ -44,8 +44,8 @@ function renderData(target) {
                     <input type="text" id="${target[i].id}" value="${target[i].name}"readonly>
                     </td>
                     <td>
-                        <button class="btn${target[i].id}" onclick="editCatalog(${target[i].id}) ">Edit</button>
-                        <button onclick="deleteCatalog(${target[i].id})">Delete</button>
+                        <button  class="btn btn-outline-info" id="btn${target[i].id}" onclick="editCatalog(${target[i].id}) ">Edit</button>
+                        <button class="btn btn-outline-danger" onclick="deleteCatalog(${target[i].id})">Delete</button>
                     </td>
                 </tr>
             `
@@ -67,7 +67,7 @@ function printPageList(target) {
     let pageBtnList = ``;
     for (let i = 0; i < pageCount; i++) {
         pageBtnList += `
-            <button onclick="changePage(${i})" style="background-color: ${nowPage == i ? "gold" : ""}">${i + 1}</button>
+            <button class="btn btn-secondary" onclick="changePage(${i})" style="background-color: ${nowPage == i ? "rgb(57, 89, 143)" : ""}">${i + 1}</button>
         `
     }
     document.querySelector(".listPage").innerHTML = pageBtnList;
@@ -99,7 +99,7 @@ function changePage(page) {
 
 //-----------------Add catalog--------------------
 function addData() {
-    let inputData = document.querySelector(".addCatalog").value
+    let inputData = document.querySelector("#addCatalog").value
     let newCatalog = {
         id: Date.now(),
         name: inputData
@@ -115,7 +115,7 @@ function addData() {
                 categoryList.push(newCatalog)
                 localStorage.setItem("categoryList", JSON.stringify(categoryList))
                 printPageList(categoryList)
-                document.querySelector(".addCatalog").value = ""
+                document.querySelector("#addCatalog").value = ""
                 return true
             }
         }
@@ -145,12 +145,12 @@ function editCatalog(target) {
 
     if (checkEdit == false) {
         document.querySelector(`#${CSS.escape(target)}`).removeAttribute("readonly")
-        document.querySelector(`.btn${CSS.escape(target)}`).textContent = "Apply"
+        document.querySelector(`#btn${CSS.escape(target)}`).textContent = "Apply"
         checkEdit = true
 
     } else if (checkEdit == true) {
         document.querySelector(`#${CSS.escape(target)}`).setAttribute("readonly", "readonly")
-        document.querySelector(`.btn${CSS.escape(target)}`).textContent = "Edit"
+        document.querySelector(`#btn${CSS.escape(target)}`).textContent = "Edit"
         let edited = document.querySelector(`#${CSS.escape(target)}`).value
         for (let i in categoryList) {
             if (categoryList[i].id == target) {
@@ -168,7 +168,7 @@ function editCatalog(target) {
 
 //-------------Search catalog----------------
 function search() {
-    let inputData = document.querySelector(".searchData").value
+    let inputData = document.querySelector("#floatingTextarea").value
     let output = categoryList
     let searchResult = []
     for (let i in categoryList) {

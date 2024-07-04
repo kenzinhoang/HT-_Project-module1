@@ -12,12 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let content = ""
     // ở form đăng ký ấn vào sign in
     // sử dụng preventDefault để hủy mặc định của thể form 
-    document.querySelector(".addUserBtn").addEventListener("click", function (event) {
+    document.querySelector("#addUserBtn").addEventListener("click", function (event) {
         event.preventDefault();
 
         if (check == false) {
-            console.log("da vao1");
-            //content = 
             check = true
             document.querySelector(".user-manage-tools").querySelector("form").classList.add("active")
             return
@@ -55,15 +53,15 @@ function userManage(list) {
                     <td>#${list[i].id}</td>
                     <td>&#129414 ${list[i].userName}</td>
                     <td>${list[i].userStatus ? "Hoạt động" : "Khoá"}
-                        <button onclick="changeStatus(${list[i].id})">Khoá / Mở Khoá</button>
+                        <button onclick="changeStatus(${list[i].id})" class="btn btn-outline-info">Khoá / Mở Khoá</button>
                         </td>
                     <td>
-                        <button onclick="deleteUser(${list[i].id})">Delete</button>
+                        <button onclick="deleteUser(${list[i].id})" class="btn btn-outline-danger">Delete</button>
                     </td>
                 </tr>
         `
     }
-    document.querySelector(".user-manage .table tbody").innerHTML = user
+    document.querySelector(".table tbody").innerHTML = user
 }
 userManage(userList)
 
@@ -188,14 +186,14 @@ function sortUser() {
     let sortUserList = userList
     if (value == 1) {
         sortUserList.sort((a, b) => a.userName.localeCompare(b.userName))
-        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        document.querySelector(".table tbody").innerHTML = ""
         userManage(sortUserList)
 
 
     }
     if (value == 2) {
         (sortUserList.sort((a, b) => a.userName.localeCompare(b.userName))).reverse()
-        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        document.querySelector(".table tbody").innerHTML = ""
         userManage(sortUserList)
     }
     printPageList(sortUserList)
@@ -211,14 +209,14 @@ function sortStatus() {
     let sortUserList = userList
     if (value == 1) {
         sortUserList.sort((a, b) => a.userStatus - b.userStatus)
-        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        document.querySelector(".table tbody").innerHTML = ""
         userManage(sortUserList)
 
 
     }
     if (value == 2) {
         sortUserList.sort((a, b) => b.userStatus - a.userStatus)
-        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        document.querySelector(".table tbody").innerHTML = ""
         userManage(sortUserList)
 
     }
@@ -235,7 +233,7 @@ function sortId() {
     let sortUserList = userList
     if (value == 1) {
         sortUserList.sort((a, b) => b.id - a.id)
-        document.querySelector(".user-manage .table tbody").innerHTML = ""
+        document.querySelector(".table tbody").innerHTML = ""
         userManage(sortUserList)
 
 
@@ -254,7 +252,7 @@ function sortId() {
 function search() {
 
     let users = userList
-    let keyword = document.querySelector(".searchInput").value
+    let keyword = document.querySelector("#floatingTextarea").value
     console.log("kw", keyword);
     let result = []
     for (let i in users) {
@@ -286,7 +284,7 @@ function printPageList(target) {
     let pageBtnList = ``;
     for (let i = 0; i < pageCount; i++) {
         pageBtnList += `
-            <button onclick="changePage(${i})" style="background-color: ${nowPage == i ? "gold" : ""}">${i + 1}</button>
+            <button class="btn btn-secondary" onclick="changePage(${i})" style="background-color: ${nowPage == i ? "rgb(57, 89, 143)" : ""}">${i + 1}</button>
         `
     }
     document.querySelector(".listPage").innerHTML = pageBtnList;
